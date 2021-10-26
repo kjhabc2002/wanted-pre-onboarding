@@ -97,3 +97,16 @@ class PostingDetailView(View):
             return JsonResponse({'message':'JSON_DECODE_ERROR'}, status=400)
         except KeyError:
             return JsonResponse({'message':'KEY_ERROR'}, status=400)
+        
+    @login_decorator
+    def delete(self, request, posting_id):
+
+        user = request.user
+
+        if not Posting.objects.filter(id=posting_id, user=user).exists():
+            return JsonResponse({'message':'INVALID_POSTING_ID'}, status=404)
+
+        post = Posting.objects.get(id=posting_id, user=user)
+            
+        post.delete()
+        return JsonResponse({'message':'DELETED'}, status=200)
