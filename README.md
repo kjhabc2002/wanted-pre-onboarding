@@ -242,7 +242,7 @@ Response
 
 
 
-### 6. DELETE 게시물 삭제
+#### 6. DELETE 게시물 삭제
 
 Request
 
